@@ -11,49 +11,65 @@
 
         <EditText
             android:id="@+id/etUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="282dp"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Username"
-            android:layout_marginTop="150dp"
-            android:layout_marginHorizontal="100dp"/>
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@drawable/rounded_edittext"
+            android:layout_marginTop="225dp"
+            android:layout_marginHorizontal="55dp"/>
 
         <EditText
             android:id="@+id/etPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="282dp"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
             android:ems="10"
             android:inputType="textPassword"
             android:hint="Password"
-            android:layout_marginTop="200dp"
-            android:layout_marginHorizontal="100dp"/>
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@drawable/rounded_edittext"
+            android:layout_marginTop="285dp"
+            android:layout_marginHorizontal="55dp"/>
 
         <EditText
             android:id="@+id/etRepeatPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="282dp"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:hint="Password"
-            android:layout_marginTop="250dp"
-            android:layout_marginHorizontal="100dp"/>
+            android:hint="Repeat Password"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@drawable/rounded_edittext"
+            android:layout_marginTop="345dp"
+            android:layout_marginHorizontal="55dp"/>
 
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="53dp"
             android:text="Register"
-            android:layout_marginTop="300dp"
-            android:layout_marginHorizontal="100dp"/>
+            android:backgroundTint="@color/netflix_red"
+            android:textColor="@color/white"
+            android:layout_marginTop="400dp"
+            android:layout_marginHorizontal="55dp"/>
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="53dp"
+            android:layout_marginHorizontal="55dp"
+            android:layout_marginTop="600dp"
             android:text="Login"
-            android:layout_marginTop="500dp"
-            android:layout_marginHorizontal="100dp" />
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white" />
 
     </FrameLayout>
 

@@ -82,7 +82,7 @@ public class FragmentLogin extends Fragment {
                     if(response.getString("status").equals("Sucesso")){
                         System.out.println("granted");
                     }else{
-                        System.out.println("fail");
+                        System.out.println("invalid login");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

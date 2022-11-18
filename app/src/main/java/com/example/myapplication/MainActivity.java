@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements CallbackFragment 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_MyApplication);
         setContentView(R.layout.activity_main);
         addFragment();
     }
