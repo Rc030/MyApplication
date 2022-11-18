@@ -17,8 +17,11 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Username"
-            android:layout_marginTop="150dp"
-            android:layout_marginHorizontal="100dp"/>
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@color/medium_gray"
+            android:layout_marginTop="300dp"
+            android:layout_marginHorizontal="55dp"/>
 
         <EditText
             android:id="@+id/etPassword"
@@ -26,26 +29,31 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
             android:hint="Password"
-            android:layout_marginTop="225dp"
-            android:layout_marginHorizontal="100dp"/>
+            android:layout_marginTop="350dp"
+            android:layout_marginHorizontal="55dp"/>
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:layout_marginTop="300dp"
-            android:layout_marginHorizontal="100dp" />
+            android:backgroundTint="@color/netflix_red"
+            android:textColor="@color/white"
+            android:layout_marginTop="400dp"
+            android:layout_marginHorizontal="55dp" />
 
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="55dp"
+            android:layout_marginTop="600dp"
             android:text="Register"
-            android:layout_marginTop="500dp"
-            android:layout_marginHorizontal="100dp"/>
-
+            android:textColor="@color/white" />
 
     </FrameLayout>
 
