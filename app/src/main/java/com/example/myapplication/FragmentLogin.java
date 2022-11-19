@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,11 +26,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FragmentLogin extends Fragment {
-
     final static String loginUrl = "http://34.175.83.209:8080/Connect/login";
     Button btnLogin, btnRegister;
     EditText etUserName, etPassword;
     CallbackFragment callbackFragment;
+    Activity act = getActivity();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class FragmentLogin extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), VideosActivity.class);
+                startActivity(intent);
                 loginRequest(etUserName.getText().toString(), etPassword.getText().toString());
             }
         });
@@ -80,6 +84,8 @@ public class FragmentLogin extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     if(response.getString("status").equals("Sucesso")){
+                        Intent intent = new Intent(getActivity(), VideosActivity.class);
+                        startActivity(intent);
                         System.out.println("granted");
                     }else{
                         System.out.println("invalid login");

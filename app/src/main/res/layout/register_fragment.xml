@@ -61,6 +61,15 @@
             android:layout_marginTop="400dp"
             android:layout_marginHorizontal="55dp"/>
 
+        <TextView
+            android:id="@+id/errorTxtView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="455dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="55dp"
+            android:text=""
+            android:textColor="@color/netflix_red" />
+
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"

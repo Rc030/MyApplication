@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +27,7 @@ public class FragmentRegister extends Fragment {
     final static String signupUrl = "http://34.175.83.209:8080/Connect/signup";
     Button btnLogin, btnRegister;
     EditText etUserName, etPassword, etRepeatPassword;
+    TextView errorTextView;
     CallbackFragment callbackFragment;
     @Nullable
     @Override
@@ -34,6 +37,7 @@ public class FragmentRegister extends Fragment {
         etUserName = view.findViewById(R.id.etUserName);
         etPassword = view.findViewById(R.id.etPassword);
         etRepeatPassword = view.findViewById(R.id.etRepeatPassword);
+        errorTextView = view.findViewById(R.id.errorTxtView);
 
         btnLogin = view.findViewById(R.id.btnLogin);
         btnRegister = view.findViewById(R.id.btnRegister);
@@ -51,7 +55,17 @@ public class FragmentRegister extends Fragment {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signupRequest(etUserName.getText().toString(), etPassword.getText().toString(), etRepeatPassword.getText().toString());
+                String usr = etUserName.getText().toString();
+                String p1 = etPassword.getText().toString();
+                String p2 = etRepeatPassword.getText().toString();
+                if(p1.equals(p2) && !p1.equals("") && !usr.equals("")){
+                    errorTextView.setText("");
+                    signupRequest(usr, p1, p2);
+                }else if(!p1.equals(p2)){
+                    errorTextView.setText("Passwords do not match.");
+                }else{
+                    errorTextView.setText("Neither the username or password can be empty");
+                }
             }
         });
 
