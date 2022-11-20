@@ -18,8 +18,9 @@
         <item name="android:windowBackground">@drawable/splash_bg</item>
     </style>
     <style name="Theme.Videos" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="android:statusBarColor">@color/black</item>
-        <item name="android:actionMenuTextColor">@color/white</item>
     </style>
 
 </resources>

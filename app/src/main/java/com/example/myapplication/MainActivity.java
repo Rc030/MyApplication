@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements CallbackFragment 
         fragmentTransaction.commit();
     }
 
-
     @Override
     public void changefragmentRegister() {
         replaceFragmentRegister();
