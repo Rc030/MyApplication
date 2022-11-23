@@ -43,12 +43,14 @@ public class MainActivity extends AppCompatActivity implements CallbackFragment 
     }
 
     @Override
-    public void changefragmentRegister() {
-        replaceFragmentRegister();
-    }
+    public void changefragmentRegister() { replaceFragmentRegister(); }
 
     @Override
-    public void changefragmentLogin() {
-        replaceFragmentLogin();
+    public void changefragmentLogin() { replaceFragmentLogin(); }
+
+    @Override
+    public void changefragmentMovie() {
+
     }
+
 }

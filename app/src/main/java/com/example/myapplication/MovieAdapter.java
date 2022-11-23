@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import androidx.fragment.app.Fragment;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
-public class MovieAdapter implements ListAdapter {
+public class MovieAdapter extends Fragment implements ListAdapter {
     Context context;
     ArrayList<MovieModel> arrayList;
-
+    CallbackFragment callbackFragment;
     public MovieAdapter(Context context, ArrayList<MovieModel> list){
         this.context = context;
         this.arrayList = list;
@@ -55,21 +56,23 @@ public class MovieAdapter implements ListAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MovieModel movie = arrayList.get(position);
+        FragmentHome fragmentHome = new FragmentHome();
         if(convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             convertView = layoutInflater.inflate(R.layout.movie_row, null);
             convertView.setOnClickListener(v -> {
-                //System.out.println("clique " + getItem(position));
+
             });
             TextView tittle = convertView.findViewById(R.id.movie_title);
             ImageView imageView = convertView.findViewById(R.id.thumbnail);
-            tittle.setText(movie.getName());
+            tittle.setText(movie.getName() + "  " + movie.getId());
             Picasso.with(context)
                     .load(movie.thumbnail)
                     .into(imageView);
         }
         return convertView;
     }
+
     @Override
     public int getItemViewType(int position) {
         return position;

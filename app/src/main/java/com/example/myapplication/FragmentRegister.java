@@ -40,7 +40,6 @@ public class FragmentRegister extends Fragment {
             if(callbackFragment !=null){
                 callbackFragment.changefragmentLogin();
             }
-
         });
 
         btnRegister.setOnClickListener(view1 -> {
