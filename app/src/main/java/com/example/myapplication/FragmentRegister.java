@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,18 +7,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,30 +36,24 @@ public class FragmentRegister extends Fragment {
         btnLogin = view.findViewById(R.id.btnLogin);
         btnRegister = view.findViewById(R.id.btnRegister);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(callbackFragment !=null){
-                    callbackFragment.changefragmentLogin();
-                }
-
+        btnLogin.setOnClickListener(view12 -> {
+            if(callbackFragment !=null){
+                callbackFragment.changefragmentLogin();
             }
+
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String usr = etUserName.getText().toString();
-                String p1 = etPassword.getText().toString();
-                String p2 = etRepeatPassword.getText().toString();
-                if(p1.equals(p2) && !p1.equals("") && !usr.equals("")){
-                    errorTextView.setText("");
-                    signupRequest(usr, p1, p2);
-                }else if(!p1.equals(p2)){
-                    errorTextView.setText("Passwords do not match.");
-                }else{
-                    errorTextView.setText("Neither the username or password can be empty");
-                }
+        btnRegister.setOnClickListener(view1 -> {
+            String usr = etUserName.getText().toString();
+            String p1 = etPassword.getText().toString();
+            String p2 = etRepeatPassword.getText().toString();
+            if(p1.equals(p2) && !p1.equals("") && !usr.equals("")){
+                errorTextView.setText("");
+                signupRequest(usr, p1, p2);
+            }else if(!p1.equals(p2)){
+                errorTextView.setText("Passwords do not match.");
+            }else{
+                errorTextView.setText("Neither the username or password can be empty");
             }
         });
 
@@ -87,25 +75,17 @@ public class FragmentRegister extends Fragment {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, signupUrl, postData, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    if(response.getString("status").equals("Sucesso")){
-                        System.out.println("granted");
-                    }else{
-                        System.out.println("fail");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, signupUrl, postData, response -> {
+            try {
+                if(response.getString("status").equals("Sucesso")){
+                    System.out.println("granted");
+                }else{
+                    System.out.println("fail");
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error.toString());
-            }
-        });
+        }, error -> System.out.println(error.toString()));
         requestQueue.add(jsonObjectRequest);
     }
 
