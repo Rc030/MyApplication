@@ -45,7 +45,7 @@ public class FragmentHome extends Fragment {
                     JSONObject jo = response.getJSONArray("movies").getJSONObject(i);
                     arrayList.add(new MovieModel(jo.getString("name"), jo.getInt("id"), "http://34.175.83.209:8080/download/thumbnail/" + jo.getInt("id")));
                 }
-                MovieAdapter movieAdapter = new MovieAdapter(getActivity().getApplicationContext(), arrayList);
+                MovieAdapter movieAdapter = new MovieAdapter(getActivity().getApplicationContext(), arrayList, getArguments().getString("user"), getArguments().getString("pass"));
                 list.setAdapter(movieAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();

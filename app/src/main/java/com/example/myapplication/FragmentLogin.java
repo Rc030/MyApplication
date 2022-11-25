@@ -34,8 +34,8 @@ public class FragmentLogin extends Fragment {
         btnRegister = view.findViewById(R.id.btnRegister);
 
         btnLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), VideosActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(getActivity(), VideosActivity.class);
+            //startActivity(intent);
             loginRequest(etUserName.getText().toString(), etPassword.getText().toString());
         });
 
@@ -68,6 +68,8 @@ public class FragmentLogin extends Fragment {
             try {
                 if(response.getString("status").equals("Sucesso")){
                     Intent intent = new Intent(getActivity(), VideosActivity.class);
+                    intent.putExtra("user", user);
+                    intent.putExtra("pass", password);
                     startActivity(intent);
                     System.out.println("granted");
                 }else{
