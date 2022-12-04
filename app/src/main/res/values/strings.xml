@@ -13,4 +13,6 @@
     <string name="password">Password</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="thumbnail">Thumbnail</string>
+    <string name="passwords_do_not_match">Passwords do not match.</string>
+    <string name="password_connot_be_empty">Neither the username or password can be empty</string>
 </resources>

@@ -55,9 +55,9 @@ public class FragmentRegister extends Fragment {
                 errorTextView.setText("");
                 signupRequest(usr, p1, p2);
             } else if (!p1.equals(p2)) {
-                errorTextView.setText("Passwords do not match.");
+                errorTextView.setText(R.string.passwords_do_not_match);
             } else {
-                errorTextView.setText("Neither the username or password can be empty");
+                errorTextView.setText(R.string.password_connot_be_empty);
             }
         });
 

@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,12 +24,17 @@ import java.util.ArrayList;
 public class FragmentHome extends Fragment {
     View view;
     ArrayList<MovieModel> arrayList;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         arrayList = new ArrayList<>();
         movieListRequest();
+        swipeRefreshLayout.setOnRefreshListener(
+                this::updateOperation
+        );
         return view;
     }
 
@@ -40,13 +47,14 @@ public class FragmentHome extends Fragment {
             e.printStackTrace();
         }
 
-        @SuppressLint("CutPasteId") JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://34.175.83.209:8080/search/all", postData, response -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://34.175.83.209:8080/search/all", postData, response -> {
             try {
                 final ListView list = view.findViewById(R.id.list);
                 for (int i = 0; i < response.getJSONArray("movies").length(); i++) {
                     JSONObject jo = response.getJSONArray("movies").getJSONObject(i);
                     arrayList.add(new MovieModel(jo.getString("name"), jo.getInt("id"), "http://34.175.83.209:8080/download/thumbnail/" + jo.getInt("id")));
                 }
+                if(arrayList.isEmpty()) arrayList.add(new MovieModel("No movies found", -1, null));
                 assert getArguments() != null;
                 MovieAdapter movieAdapter = new MovieAdapter(this.getContext(), requireActivity().getApplicationContext(), arrayList, getArguments().getString("user"), getArguments().getString("pass"));
                 list.setAdapter(movieAdapter);
@@ -55,6 +63,14 @@ public class FragmentHome extends Fragment {
             }
         }, error -> System.out.println(error.toString()));
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void updateOperation(){
+        Intent intent = new Intent(getActivity(), VideosActivity.class);
+        assert getArguments() != null;
+        intent.putExtra("user", getArguments().getString("user"));
+        intent.putExtra("pass", getArguments().getString("pass"));
+        startActivity(intent);
     }
 
 }

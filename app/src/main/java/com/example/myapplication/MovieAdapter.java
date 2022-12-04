@@ -51,7 +51,7 @@ public class MovieAdapter extends BaseAdapter implements ListAdapter {
                 intent.putExtra("pass", this.pass);
                 intent.putExtra("movieId", Integer.toString(movie.getId()));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                setResolution();
+                if(movie.getId() != -1) setResolution();
             });
             TextView tittle = convertView.findViewById(R.id.movie_title);
             ImageView imageView = convertView.findViewById(R.id.thumbnail);
@@ -63,7 +63,7 @@ public class MovieAdapter extends BaseAdapter implements ListAdapter {
 
     public void setResolution() {
         String[] resolutions = {"360p", "1080p"};
-        AlertDialog.Builder alert = new AlertDialog.Builder(c);
+        AlertDialog.Builder alert = new AlertDialog.Builder(c, R.style.DeleteDialog);
         alert.setTitle("Resolution");
         alert.setSingleChoiceItems(resolutions, -1, (dialog, which) -> selected = resolutions[which]);
         alert.setPositiveButton("Continue", (dialog, which) -> {

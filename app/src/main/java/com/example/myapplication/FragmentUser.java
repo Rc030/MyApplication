@@ -45,7 +45,7 @@ public class FragmentUser extends Fragment {
         infoRequest();
 
         btnDeleteAccount.setOnClickListener(view1 -> {
-            AlertDialog.Builder alert = new AlertDialog.Builder(this.getContext());
+            AlertDialog.Builder alert = new AlertDialog.Builder(this.getContext(), R.style.DeleteDialog);
             alert.setTitle("Delete");
             alert.setMessage("Are you sure you want to delete your account?");
             alert.setPositiveButton("Yes", (dialog, which) -> {
@@ -58,7 +58,9 @@ public class FragmentUser extends Fragment {
 
         btnChangePassword.setOnClickListener(view1 -> {
             String newPass = etNewPass.getText().toString();
-            changePasswordRequest(newPass);
+            if(!newPass.equals("")){
+                changePasswordRequest(newPass);
+            }
         });
 
         return view;
