@@ -2,16 +2,20 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class VideosActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
     BottomNavigationView bottomNavigationView;
     Bundle bundle = new Bundle();
+    FragmentHome fragmentHome = new FragmentHome();
+    FragmentUser fragmentUser = new FragmentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +30,6 @@ public class VideosActivity extends AppCompatActivity implements NavigationBarVi
         bottomNavigationView.setSelectedItemId(R.id.footer_home);
     }
 
-    FragmentHome fragmentHome = new FragmentHome();
-    FragmentUpload fragmentUpload = new FragmentUpload();
-
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -38,12 +39,9 @@ public class VideosActivity extends AppCompatActivity implements NavigationBarVi
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragmentHome).commit();
                 return true;
 
-            case R.id.footer_upload:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragmentUpload).commit();
-                return true;
-
             case R.id.footer_user:
-                //getSupportFragmentManager().beginTransaction().replace(R.id.container, thirdFragment).commit();
+                fragmentUser.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragmentUser).commit();
                 return true;
         }
         return false;

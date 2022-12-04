@@ -3,11 +3,13 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity implements CallbackFragment {
+public class MainActivity extends AppCompatActivity implements CallbackFragmen{
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,7 +17,8 @@ public class MainActivity extends AppCompatActivity implements CallbackFragment 
         setContentView(R.layout.activity_main);
         addFragment();
     }
-    public void addFragment(){
+
+    public void addFragment() {
         FragmentLogin fragment = new FragmentLogin();
         fragment.setCallbackFragment(this);
         fragmentManager = getSupportFragmentManager();
@@ -23,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements CallbackFragment 
         fragmentTransaction.add(R.id.fragmentContainer, fragment);
         fragmentTransaction.commit();
     }
-    public void replaceFragmentRegister(){
+
+    public void replaceFragmentRegister() {
         FragmentRegister fragment = new FragmentRegister();
         fragment.setCallbackFragment(this);
         fragmentManager = getSupportFragmentManager();
@@ -32,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements CallbackFragment 
         fragmentTransaction.replace(R.id.fragmentContainer, fragment);
         fragmentTransaction.commit();
     }
-    public void replaceFragmentLogin(){
+
+    public void replaceFragmentLogin() {
         FragmentLogin fragment = new FragmentLogin();
         fragment.setCallbackFragment(this);
         fragmentManager = getSupportFragmentManager();
@@ -43,14 +48,13 @@ public class MainActivity extends AppCompatActivity implements CallbackFragment 
     }
 
     @Override
-    public void changefragmentRegister() { replaceFragmentRegister(); }
+    public void changeFragmentRegister() {
+        replaceFragmentRegister();
+    }
 
     @Override
-    public void changefragmentLogin() { replaceFragmentLogin(); }
-
-    @Override
-    public void changefragmentMovie() {
-
+    public void changeFragmentLogin() {
+        replaceFragmentLogin();
     }
 
 }

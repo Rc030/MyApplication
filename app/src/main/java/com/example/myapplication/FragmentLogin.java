@@ -7,41 +7,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FragmentLogin extends Fragment {
+public class FragmentLogin extends Fragment{
     final static String loginUrl = "http://34.175.83.209:8080/Connect/login";
     Button btnLogin, btnRegister;
     EditText etUserName, etPassword;
-    CallbackFragment callbackFragment;
+    CallbackFragmen callbackFragment;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         etUserName = view.findViewById(R.id.etUserName);
         etPassword = view.findViewById(R.id.etPassword);
-
         btnLogin = view.findViewById(R.id.btnLogin);
         btnRegister = view.findViewById(R.id.btnRegister);
-
-        btnLogin.setOnClickListener(v -> {
-            //Intent intent = new Intent(getActivity(), VideosActivity.class);
-            //startActivity(intent);
-            loginRequest(etUserName.getText().toString(), etPassword.getText().toString());
-        });
+        btnLogin.setOnClickListener(v -> loginRequest(etUserName.getText().toString(), etPassword.getText().toString()));
 
         btnRegister.setOnClickListener(v -> {
-            if(callbackFragment != null){
-                callbackFragment.changefragmentRegister();
+            if (callbackFragment != null) {
+                callbackFragment.changeFragmentRegister();
             }
             System.out.println(callbackFragment);
         });
@@ -49,12 +47,12 @@ public class FragmentLogin extends Fragment {
         return view;
     }
 
-    public void setCallbackFragment(CallbackFragment callbackFragment){
+    public void setCallbackFragment(CallbackFragmen callbackFragment) {
         this.callbackFragment = callbackFragment;
     }
 
-    protected void loginRequest(String user, String password){
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+    protected void loginRequest(String user, String password) {
+        RequestQueue requestQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
 
         JSONObject postData = new JSONObject();
         try {
@@ -66,14 +64,14 @@ public class FragmentLogin extends Fragment {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, loginUrl, postData, response -> {
             try {
-                if(response.getString("status").equals("Sucesso")){
+                if (response.getString("status").equals("Success")) {
                     Intent intent = new Intent(getActivity(), VideosActivity.class);
                     intent.putExtra("user", user);
                     intent.putExtra("pass", password);
                     startActivity(intent);
-                    System.out.println("granted");
-                }else{
-                    System.out.println("invalid login");
+                    System.out.println("Granted");
+                } else {
+                    System.out.println("Invalid login");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
