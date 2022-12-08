@@ -1,60 +1,49 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements CallbackFragmen{
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
+public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+    BottomNavigationView bottomNavigationView;
+    Bundle bundle = new Bundle();
+    FragmentHome fragmentHome = new FragmentHome();
+    FragmentUser fragmentUser = new FragmentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_MyApplication);
         setContentView(R.layout.activity_main);
-        addFragment();
+        setTheme(R.style.Theme_Main);
+        Intent intent = getIntent();
+        bundle.putString("user", intent.getStringExtra("user"));
+        bundle.putString("pass", intent.getStringExtra("pass"));
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.footer_home);
     }
 
-    public void addFragment() {
-        FragmentLogin fragment = new FragmentLogin();
-        fragment.setCallbackFragment(this);
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainer, fragment);
-        fragmentTransaction.commit();
-    }
-
-    public void replaceFragmentRegister() {
-        FragmentRegister fragment = new FragmentRegister();
-        fragment.setCallbackFragment(this);
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment);
-        fragmentTransaction.commit();
-    }
-
-    public void replaceFragmentLogin() {
-        FragmentLogin fragment = new FragmentLogin();
-        fragment.setCallbackFragment(this);
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment);
-        fragmentTransaction.commit();
-    }
-
+    @SuppressLint("NonConstantResourceId")
     @Override
-    public void changeFragmentRegister() {
-        replaceFragmentRegister();
-    }
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.footer_home:
+                fragmentHome.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragmentHome).commit();
+                return true;
 
-    @Override
-    public void changeFragmentLogin() {
-        replaceFragmentLogin();
+            case R.id.footer_user:
+                fragmentUser.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragmentUser).commit();
+                return true;
+        }
+        return false;
     }
-
 }

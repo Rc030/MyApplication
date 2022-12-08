@@ -7,16 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +24,7 @@ public class FragmentLogin extends Fragment{
     Button btnLogin, btnRegister;
     EditText etUserName, etPassword;
     CallbackFragmen callbackFragment;
-
+    TextView errorTextView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +34,7 @@ public class FragmentLogin extends Fragment{
         etPassword = view.findViewById(R.id.etPassword);
         btnLogin = view.findViewById(R.id.btnLogin);
         btnRegister = view.findViewById(R.id.btnRegister);
+        errorTextView = view.findViewById(R.id.loginTxtView);
         btnLogin.setOnClickListener(v -> loginRequest(etUserName.getText().toString(), etPassword.getText().toString()));
 
         btnRegister.setOnClickListener(v -> {
@@ -65,13 +65,14 @@ public class FragmentLogin extends Fragment{
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, loginUrl, postData, response -> {
             try {
                 if (response.getString("status").equals("Success")) {
-                    Intent intent = new Intent(getActivity(), VideosActivity.class);
+                    errorTextView.setText("");
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("user", user);
                     intent.putExtra("pass", password);
                     startActivity(intent);
                     System.out.println("Granted");
                 } else {
-                    System.out.println("Invalid login");
+                    errorTextView.setText(response.getString("error"));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

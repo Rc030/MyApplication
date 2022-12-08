@@ -79,7 +79,7 @@ public class FragmentUser extends Fragment {
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, deleteUrl, postData, response -> {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
+            Intent intent = new Intent(getActivity(), StartActivity.class);
             startActivity(intent);
         }, error -> System.out.println(error.toString()));
         requestQueue.add(jsonObjectRequest);

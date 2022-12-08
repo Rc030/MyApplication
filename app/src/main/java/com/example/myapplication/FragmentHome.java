@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,14 +39,10 @@ public class FragmentHome extends Fragment {
     protected void movieListRequest() {
         RequestQueue requestQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
         JSONObject postData = new JSONObject();
-        try {
-            postData.put("test", "test");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://34.175.83.209:8080/search/all", postData, response -> {
             try {
+                arrayList = new ArrayList<>();
                 final ListView list = view.findViewById(R.id.list);
                 for (int i = 0; i < response.getJSONArray("movies").length(); i++) {
                     JSONObject jo = response.getJSONArray("movies").getJSONObject(i);
@@ -66,11 +60,8 @@ public class FragmentHome extends Fragment {
     }
 
     public void updateOperation(){
-        Intent intent = new Intent(getActivity(), VideosActivity.class);
-        assert getArguments() != null;
-        intent.putExtra("user", getArguments().getString("user"));
-        intent.putExtra("pass", getArguments().getString("pass"));
-        startActivity(intent);
+        movieListRequest();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 }
