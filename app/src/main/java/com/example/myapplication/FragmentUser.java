@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -81,6 +83,7 @@ public class FragmentUser extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, deleteUrl, postData, response -> {
             Intent intent = new Intent(getActivity(), StartActivity.class);
             startActivity(intent);
+            Toast.makeText(getContext(), "Your account has been deleted.", Toast.LENGTH_SHORT).show();
         }, error -> System.out.println(error.toString()));
         requestQueue.add(jsonObjectRequest);
     }
@@ -97,7 +100,12 @@ public class FragmentUser extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, changePassUrl, postData, response -> System.out.println("Sucesso"), error -> System.out.println(error.toString()));
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, changePassUrl, postData,
+                response -> {
+                    Intent intent = new Intent(getActivity(), StartActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getContext(), "Your password has been updated.", Toast.LENGTH_SHORT).show();
+            }, error -> System.out.println(error.toString()));
         requestQueue.add(jsonObjectRequest);
     }
 

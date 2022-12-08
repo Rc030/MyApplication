@@ -42,8 +42,8 @@ public class FragmentHome extends Fragment {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://34.175.83.209:8080/search/all", postData, response -> {
             try {
-                arrayList = new ArrayList<>();
                 final ListView list = view.findViewById(R.id.list);
+                arrayList = new ArrayList<>();
                 for (int i = 0; i < response.getJSONArray("movies").length(); i++) {
                     JSONObject jo = response.getJSONArray("movies").getJSONObject(i);
                     arrayList.add(new MovieModel(jo.getString("name"), jo.getInt("id"), "http://34.175.83.209:8080/download/thumbnail/" + jo.getInt("id")));

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowInsets;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -72,6 +73,7 @@ public class PlayActivity extends AppCompatActivity {
                 player.setMediaItem(mediaItem);
                 player.seekTo(0);
                 player.prepare();
+                if(source.equals("NGINX")) Toast.makeText(this, "You may have to click play more than once to begin.", Toast.LENGTH_SHORT).show();
                 player.play();
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
             } catch (JSONException e) {
